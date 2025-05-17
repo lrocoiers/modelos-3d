@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auténtico Creativo - Home</title>
+        <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/open-props" />
+    <style>
+        @font-face {
+            font-family: 'fontFiesta';
+            src: url('font/Fiesta.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'FuturaURW-Medium';
+            src: url('font/FuturaURW-Medium.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        header {
+            background-size: cover;
+            overflow: hidden;
+            position: relative; /* Para posicionar el video absolutamente */
+        }
+        .filtroBannerInicio {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); 
+        }
+        .bannerHi {
+            position: relative; 
+            z-index: 1; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; 
+            text-align: center;
+            margin: 0 20%; /* Margen de 20px en cada lado */
+        }
+        .bannerHi p{
+            margin-top: 20px;
+            color: aliceblue;
+        }
+        .button-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        .button-container .custom-button {
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: #037bad;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.3s ease;
+        }
+        .button-container .custom-button::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+            z-index: 1;
+        }
+        .button-container .custom-button:hover::after {
+            transform: scaleX(1);
+        }
+        .button-container .custom-button:hover {
+            background-color: #037bad; /* Mantener el color original */
+        }
+        .button-container .custom-button span {
+            position: relative;
+            z-index: 2;
+        }
+    
+    @import "https://unpkg.com/open-props" layer(design.system);
+
+    @layer demo {
+        .stuck-top {
+            container-type: scroll-state;
+            position: sticky;
+            top: 20px;
+
+            > nav {
+                
+                transition: 
+                    background-color .3s var(--ease-3),
+                    box-shadow .3s var(--ease-3),
+                    margin .6s var(--ease-spring-3),
+                    border-radius .3s var(--ease-spring-3),
+                    border-image .3s var(--ease-3);
+
+                @container scroll-state(stuck: top) {
+                    background: #aaabb059 ; 
+                    /* Sombra gradial combinando deeppink y #037bad */
+                    box-shadow:
+                        -20px  -1px 20px 0 rgba(255, 20, 145, 0.781),
+                         20px  1px 20px 0 #037aadbe;
+                    border-radius: 20px;
+                    margin-inline: 20%;
+                    top: 20px;
+                }
+            }
+        }
+    }
+
+    @layer demo.scrollspy {
+        body {
+            timeline-scope: --section-css, --section-props, --section-nojs, --section-containers, --section-scrollstate;
+        }
+
+        @keyframes highlight {
+            5%, 10% {
+                border-block-end-color: deeppink;
+            }
+        }
+
+        nav {
+            > a {
+                animation: highlight linear both;
+                animation-range: cover 20% exit-crossing 50%;
+                border-block-end: 3px solid transparent;
+            }
+            > a:nth-child(1) { animation-timeline: --section-css }
+            > a:nth-child(2) { animation-timeline: --section-props }
+            > a:nth-child(3) { animation-timeline: --section-nojs }
+            > a:nth-child(4) { animation-timeline: --section-containers }
+            > a:nth-child(5) { animation-timeline: --section-scrollstate }
+        }
+    }
+
+    @layer demo.support {
+        :root {
+            --surface-document: var(--gray-3);
+            --surface-1: white;
+            --shadow-color: 220 3% 15%;
+            --shadow-strength: 1%;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        html {
+            block-size: 100%;
+            background: var(--surface-document);
+            color: var(--gray-10);
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-block-size: 100%;
+            font-family: system-ui, sans-serif;
+            background: #000;
+        }
+
+        section {
+            border-block-end: 2px solid #0003;
+        }
+
+        header {
+            display: grid;
+            place-content: center;
+            text-align: center;
+            gap: var(--size-5);
+            block-size: 95svh;
+            background: linear-gradient(to bottom, black 20px, #aaabb0 95%);
+            > p {
+                color: var(--gray-8);
+                letter-spacing: var(--font-letterspacing-3);
+            }
+        }
+
+        h1 {
+            font-family: 'fontFiesta', system-ui, sans-serif;
+            text-transform: uppercase;
+            font-size: var(--font-size-7);
+            letter-spacing: 0.08em;
+            text-wrap: balance;
+        }
+
+        .stuck-top {
+            z-index: 1;
+        }
+
+        nav {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            gap: 1.2rem !important;
+            padding: 0.7rem 1rem !important;
+            font-size: var(--font-size-3);
+            background-color: rgba(0, 0, 0, 0.733);
+        
+        }
+
+        nav > a {
+            color: #fff !important;
+            font-family: 'FuturaURW-Medium', Arial, sans-serif !important;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0 0.5rem;
+            transition: color 0.2s;
+        }
+
+        nav > a:hover {
+            color: #037bad !important;
+        }
+
+        .nav-logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            min-width: 120px;
+        }
+
+        .nav-logo-container img {
+            max-height: 40px;
+            max-width: 120px;
+        }
+
+        .nav-bg {
+            background-color: rgba(0, 0, 0, 0.85);
+            width: 100%;
+            position: relative;
+            z-index: 1000;
+        }
+
+    }
+
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Video de fondo -->
+        <video autoplay loop muted playsinline
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+            <source src="img/[VD]Estrellas_Fondo_Contenedor.mp4" type="video/mp4">
+        </video>
+        <!-- Filtro negro encima del video -->
+        <div class="filtroBannerInicio"></div>
+        <!-- Contenido del header -->
+        <div class="bannerHi">
+            <img src="img/Logo_AutenticoCreativo-Idex.png" alt="Logo Auténtico Creativo" style="max-width: 180px; margin-bottom: 1rem;">
+            <h1 style="color: #fff;"><span style="color: #037bad;">EXPLORAR</span> TE LLEVO A ESTE LUGAR</h1>
+            <p>Solo tienes que <span style="color: deeppink;">dar el salto</span></p>
+        </div>
+    </header>
+    <div class="stuck-top" style="position: sticky; top: 0; z-index: 1000;">
+        <nav>
+            <a href="index.html">INICIO</a>
+            <div class="nav-logo-container">
+                <img src="img/Icono-Logo_AutenticoCreativo-Idex.png" alt="Logo Auténtico Creativo">
+            </div>
+            <a href="contacto.html">CONTACTO</a>
+        </nav>
+    </div>
+    <section id="banner1Home" >
+        <header>
+            <div class="RacingBoard" style="position: relative; overflow: hidden; height: 100vh;">
+                <img src="img/RacingBoard_Png.png" alt="Imagen Racing Board" style="max-width: 100%; height: auto;">
+            <h1>CSS</h1>
+            <p>CSS es un lenguaje de estilo utilizado para describir la presentación de un documento HTML. Permite controlar el diseño, los colores, las fuentes y otros aspectos visuales de una página web.</p>
+            </div>
+        </header>
+    </section>
+
+
+     <section class="modelo-3d-section" style="background-color: white;">
+                 <h1 class="titulo-fondo">B-35</h1>
+             <div class="contenedor-3d">
+                 <model-viewer
+  src="https://lrocoiers.github.io/modelos-3d/RacingBoard-AutenticoCreativo2.glb"
+  alt="Mi Modelo"
+  auto-rotate
+  camera-controls
+  style="width: 80%; height: auto; background: transparent; display: block; margin: auto;">
+</model-viewer>
+                <div class="overlay-info">
+                    <p>Descubre el B-35</p>
+                </div>
+             </div>
+    </section>
+   
+</body>
+</html>
